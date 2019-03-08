@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+
+    Copyright (c) 2017 Oracle and/or its affiliates. All rights reserved.
+
+    You may not modify, use, reproduce, or distribute this software except in
+    compliance with the terms of the License at:
+    http://java.net/projects/javaeetutorial/pages/BerkeleyLicense
+
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Order Receipt</title>
+    </h:head>
+    <f:metadata>
+        <f:viewParam name="Name" value="#{hello.orderName}" />
+        <f:viewParam name="Room" value="#{hello.roomNo}" />
+        <f:viewParam name="Payment" value="#{hello.paymentOption}" />
+        <f:viewParam name="DrinkSize" value="#{hello.drinkSize}" />
+        <f:viewParam name="DrinkType" value="#{hello.drinkOption}" />
+        <f:viewParam name="Food" value="#{hello.foodOption}" />
+        <f:viewParam name="Extra" value="#{hello.extraOption}" />
+    </f:metadata>
+    <h:body>
+        <h:graphicImage url="#{resource['images:UMUC-logo-classic-2rgb.png']}" 
+                        alt="UMUC LOGO"/>
+        <center>
+        <h2><b><u>Order Receipt</u></b></h2>
+        <div style="border:1px solid black;width:30%;">
+            <p>
+                <h:outputText value="Order Name: #{hello.orderName}" />
+            </p>
+            <p>
+                <h:outputText value="Room Number:  #{hello.roomNo}" />
+            </p>
+            <p>
+                <h:outputText value="Payment Type:  #{hello.paymentOption}" />
+            </p>
+        </div>
+        
+        <div style="border:1px solid black;width:30%;">
+            <p>
+                <h:outputText value="Drink:  #{hello.drinkSize} #{hello.drinkOption}" />
+            </p>
+            <p>
+                <h:outputText value="Food:  #{hello.foodOption}" />
+            </p>
+            <p>
+                <h:outputText value="Extra:  #{hello.extraOption}" />
+            </p>
+            
+        </div>
+        
+        <h:form>
+            <h:commandButton id="back" 
+                             value="Back to Main Page" 
+                             action="index" />
+        </h:form>
+        </center>
+    </h:body>
+</html>
