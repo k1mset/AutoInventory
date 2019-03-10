@@ -1,14 +1,8 @@
-/**
- * Copyright (c) 2017 Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software except in
- * compliance with the terms of the License at:
- * http://java.net/projects/javaeetutorial/pages/BerkeleyLicense
- */
 package javaeetutorial.bookmarks;
 
 import javax.enterprise.inject.Model;
 import java.sql.*;
+import java.util.*;
 
 @Model
 public class Hello {
@@ -24,6 +18,7 @@ public class Hello {
     private String vehicleCondition;
     
     private String[] viewSelection;
+    private ArrayList<String> viewHandle;
         
     Connection conn;
     Statement stmt;
@@ -36,6 +31,7 @@ public class Hello {
         vehicleYear = "";
         vehicleValue = "";
         vehicleCondition = null;
+        viewHandle = new ArrayList<String>();
     }
     
     public String getVehicleMake() {
@@ -62,6 +58,10 @@ public class Hello {
         return viewSelection;
     }
     
+    public ArrayList<String> getViewHandle() {
+        return viewHandle;
+    }
+    
     public void setVehicleMake(String vehicleMake) {
         this.vehicleMake = vehicleMake;
     }
@@ -84,6 +84,10 @@ public class Hello {
     
     public void setViewSelection(String[] viewSelection) {
         this.viewSelection = viewSelection;
+    }
+    
+    public void setViewHandle(ArrayList<String> viewHandle) {
+        this.viewHandle = viewHandle;
     }
     
     public void insertInformation() {
@@ -124,7 +128,7 @@ public class Hello {
         }
     }
     
-    public String viewInformation() {
+    public void viewInformation() {
         try {
             System.out.println("Connecting to the database...");
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
@@ -196,23 +200,25 @@ public class Hello {
             ResultSet rs = stmt.executeQuery(sql);
             
             System.out.println(rs);
-            String str = "";
+                     
+            String str = null;
             
             while(rs.next()) {
-                str += "<p>";
+                str = "";
                 for(int i=0; i<viewSelection.length;i++) {
                     if (viewSelection[i].equals("Year")) {
-                        str += "caryear";
+                        str += "(caryear) ";
+                    } else if (viewSelection[i].equals("Value")) {
+                        str += "$" + (rs.getString(viewSelection[i]) + ".00 ");
                     } else {
-                        str += rs.getString(viewSelection[i]);
+                        str += (rs.getString(viewSelection[i]) + " ");
                     }
                 }
                 
-                str += "</p>";
+                viewHandle.add(str);
             }
             
             System.out.println(str);
-            return str;
         } catch(SQLException se) {
             se.printStackTrace();
         } catch(Exception e) {
@@ -236,8 +242,6 @@ public class Hello {
                 se.printStackTrace();
             }
         }
-        
-        return null;
     }
 }
 

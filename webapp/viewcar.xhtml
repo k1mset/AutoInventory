@@ -1,19 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!--
-
-    Copyright (c) 2017 Oracle and/or its affiliates. All rights reserved.
-
-    You may not modify, use, reproduce, or distribute this software except in
-    compliance with the terms of the License at:
-    http://java.net/projects/javaeetutorial/pages/BerkeleyLicense
-
--->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui = "http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Cobb's Auto Service</title>
@@ -27,11 +17,14 @@
                                 alt="Nissan Skyline R-32"/>
             </center>
             
+            #{hello.viewInformation()}
+            
             <center>
+                
             <p>
-                <h:outputText id="make"
-                                 title="Your name"
-                                 value="#{hello.viewInformation()}" />
+                <ui:repeat value="#{hello.viewHandle}" var="value">
+                    #{value} <br />
+                </ui:repeat>
             </p>
             
             <h:commandButton id="back" value="Back" action="index" />
